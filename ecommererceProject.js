@@ -1,6 +1,6 @@
 const items = [
     { name: "Green Bananas (Bunch of 5)", price: 1.99, catagorys: ["Fruit", "Fresh Produce", "Unripe", "Firm"], image: null, stock: 10 },
-    { name: "Yellow Bananas (Bunch of 6)", price: 2.29, catagorys: ["Fruit", "Fresh Produce", "Everyday Snacks", "Classic"], image: null, stock: 10 },
+    { name: "Yellow Bananas (Bunch of 6)", price: 2.29, catagorys: ["Fruit", "Fresh Produce", "Everyday Snacks", "Classic"], image: "./img/yellowBananas.jpg" , stock: 10 },
     { name: "Ripe Bananas with Spots (Bunch of 4)", price: 1.49, catagorys: ["Fruit", "Fresh Produce", "Sweet & Soft", "Quick Energy"], image: null, stock: 10 },
     { name: "Overripe/Baking Bananas (Bunch of 6)", price: 1.29, catagorys: ["Fruit", "Baking Essentials", "Smoothie Ingredients", "Zero Waste"], image: null, stock: 10 },
     { name: "Baby Bananas (Bunch of 8)", price: 2.99, catagorys: ["Fruit", "Fresh Produce", "Kids Lunchbox", "Mini Portions"], image: null, stock: 10 },
@@ -89,3 +89,24 @@ function applyCode(input){
 // applyCode("oiwerhtio")
 // console.log(codeActive)
 function removeCode(){codeActive = false}
+
+//html stuff
+
+function inject(item) {
+  const container = document.querySelector(".container");
+  container.insertAdjacentHTML(
+    "beforeend",
+`    <div class ="card">
+        <h2 class = "card-header">${item.name}</h2>
+        <div clas="cardContainer">
+        <img src="${item.image}" alt="imf of item">
+        </div>
+        <h3 class = "card-price"> "Price:${item.price} "</h3>
+        <div class="cardContainer">
+        <button class = "card-btn">Add to Cart</button>
+        </div>
+    </div>`,
+  );
+  console.log("test")
+}
+inject(items[1]);
