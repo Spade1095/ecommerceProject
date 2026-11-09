@@ -1,0 +1,91 @@
+const items = [
+    { name: "Green Bananas (Bunch of 5)", price: 1.99, catagorys: ["Fruit", "Fresh Produce", "Unripe", "Firm"], image: null, stock: 10 },
+    { name: "Yellow Bananas (Bunch of 6)", price: 2.29, catagorys: ["Fruit", "Fresh Produce", "Everyday Snacks", "Classic"], image: null, stock: 10 },
+    { name: "Ripe Bananas with Spots (Bunch of 4)", price: 1.49, catagorys: ["Fruit", "Fresh Produce", "Sweet & Soft", "Quick Energy"], image: null, stock: 10 },
+    { name: "Overripe/Baking Bananas (Bunch of 6)", price: 1.29, catagorys: ["Fruit", "Baking Essentials", "Smoothie Ingredients", "Zero Waste"], image: null, stock: 10 },
+    { name: "Baby Bananas (Bunch of 8)", price: 2.99, catagorys: ["Fruit", "Fresh Produce", "Kids Lunchbox", "Mini Portions"], image: null, stock: 10 },
+    { name: "Red Bananas (Bunch of 4)", price: 3.49, catagorys: ["Fruit", "Exotic Produce", "Specialty Items", "Gourmet"], image: null, stock: 10 },
+    { name: "Plantains / Green Cooking Bananas (3 pack)", price: 2.49, catagorys: ["Fruit", "Cooking Produce", "Savory & Fried", "Latin Cuisine"], image: null, stock: 10 },
+    { name: "Organic Yellow Bananas (Bunch of 5)", price: 2.89, catagorys: ["Fruit", "Organic Produce", "Eco-Friendly", "Everyday Snacks"], image: null, stock: 10 },
+    { name: "Single Large Yellow Banana", price: 0.59, catagorys: ["Fruit", "Grab-and-Go", "Single Serving", "On-the-Go"], image: null, stock: 10 },
+    { name: "Single Green Banana", price: 0.49, catagorys: ["Fruit", "Grab-and-Go", "Low Sugar", "Meal Prep"], image: null, stock: 10 },
+    { name: "Manzano Apple Bananas (Bunch of 5)", price: 3.19, catagorys: ["Fruit", "Exotic Produce", "Tropical Flavors", "Specialty Items"], image: null, stock: 10 },
+    { name: "Frozen Banana Chunks (1 lb bag)", price: 3.99, catagorys: ["Fruit", "Frozen Foods", "Smoothie Ingredients", "Meal Prep"], image: null, stock: 10 },
+    { name: "Blue Java Ice Cream Bananas (Bunch of 4)", price: 4.49, catagorys: ["Fruit", "Exotic Produce", "Gourmet", "Rare Finds"], image: null, stock: 10 },
+    { name: "Slightly Underripe Bananas (Bunch of 7)", price: 2.59, catagorys: ["Fruit", "Fresh Produce", "High Resistant Starch", "Meal Prep"], image: null, stock: 10 },
+    { name: "Ultra-Ripe Sweet Bananas (Bunch of 3)", price: 1.19, catagorys: ["Fruit", "Fresh Produce", "Dessert Ingredients", "Natural Sweetener"], image: null, stock: 10 },
+    { name: "Bulk Box of Bananas (20 count)", price: 8.99, catagorys: ["Fruit", "Bulk Savings", "Large Families", "Event Catering"], image: null, stock: 10 },
+    { name: "Mini Organic Bananas (Bunch of 6)", price: 3.29, catagorys: ["Fruit", "Organic Produce", "Kids Lunchbox", "Eco-Friendly"], image: null, stock: 10 },
+    { name: "Half-Ripe Bananas (Bunch of 5)", price: 1.89, catagorys: ["Fruit", "Fresh Produce", "Transitioning", "Balanced Flavor"], image: null, stock: 10 },
+    { name: "Ripe Bananas (Single Hand / 12 count)", price: 4.99, catagorys: ["Fruit", "Fresh Produce", "Family Size", "Bulk Savings"], image: null, stock: 10 },
+    { name: "Dehydrated Banana Chips (Bag)", price: 2.79, catagorys: ["Fruit", "Pantry Snacks", "Pantry Stable", "Crunchy Snacks"], image: null, stock: 10 }
+];
+const codes =["JustinSmells", "mosekova", "kachow"];
+let cart ={}
+    
+let codeActive = false;
+function addCart(add){
+if (add.stock>0){
+    if(Object.hasOwn(cart,add)){
+            cart[add.name].count++
+    }else{
+            cart[add.name] = add
+            cart[add.name]["count"] = 1
+        }
+    //look for item in the list items and chang its stock
+    }else{
+        //give error message
+
+}
+}
+addCart(items[1])
+console.log(cart)
+
+function removeCart(initial, remove){
+        for(i=0; i<remove.length; i++){
+        if(items.some(item => item.name === remove[i])){
+            initial.pop(items.find(item => item.name === remove[i]))
+        } 
+        else{
+            console.log("Item isnt in list")
+            return null
+        }
+    }
+    return initial
+}
+
+// cart = removeCart(cart, ["Oats"])
+// console.log(cart)
+
+function findTotal(cart){
+    let total = 0
+    for( i=0; i<cart.length; i++){
+        total = total + cart[i].price
+    }
+    return total
+}
+// console.log(findTotal(cart))
+
+function filter(filter){
+    let filteredItems = []
+    for(i=0; i<items.length; i++){
+        if(items[i].catagorys.includes(filter)){
+            filteredItems.push(items[i])
+        }
+    }
+    return filteredItems
+}
+
+// console.log(filter("Fruit"))
+
+function applyCode(input){
+    if(codes.some(item => item === input) && codeActive === false){
+        codeActive = input;
+    }else{
+        console.log("Invalid Code");
+        return "no"
+    }
+}
+// applyCode("oiwerhtio")
+// console.log(codeActive)
+function removeCode(){codeActive = false}

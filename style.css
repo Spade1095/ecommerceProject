@@ -21,15 +21,25 @@ body,
     width: 9rem;
     min-height: 23rem;
     min-width: 18%;
+    max-width: 14rem;
     margin: 2% 2%;
     padding: 1rem;
     border-radius: .8rem;
     display: flex;
     flex-direction: column;
-    background-color: red;
+    background-color: rgb(231, 235, 27);
+    overflow: hidden;
+}
+.title{
+    color:white;
+    font-size:5rem;
 }
 .card-header{
     color:black;
+}
+.cardContainer{
+    height: 40%; 
+  width: 100%;
 }
 .card-img{
     width: 100%;
@@ -37,18 +47,31 @@ body,
     object-fit: cover;
     padding: 0rem;
     border-radius: 1.6rem;
+    object-position: center;
 }
 .hero {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 75vh;
+  height: 70vh;
   color: white;
   background-image:
-    linear-gradient(rgba(8, 84, 130, 0.8), rgba(4, 70, 115, 0.8));
-
+    linear-gradient(rgba(223, 226, 22, 0.8), rgba(202, 183, 11, 0.8)),
+    url(img/alotofbannanas.jpg);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+}
+.card-btn{
+    height:4rem;
+    padding: 0 1.6rem;
+    background-color: #f3e38b;
+    color:#edf0ff;
+    border: 1px solid #f3f98b;
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600px;
+    cursor:pointer;
+    transition: all 0.3s;
 }
