@@ -93,15 +93,16 @@ function removeCode(){codeActive = false}
 
 //html stuff
 
-function inject(item,num) {
-  const container = document.querySelector(".container");
+function inject(item,num,con) {
+  const container = document.querySelector(con);
   container.insertAdjacentHTML(
     "beforeend",
 `    <div class ="card" data-item="${num}">
-        <h2 class = "card-header">${item.name}</h2>
         <div clas="cardContainer">
         <img src="${item.image}" alt="img of item">
         </div>
+        <h2 class = "card-header">${item.name}</h2>
+
         <h3 class = "card-price"> Price:${item.price} </h3>
        
         <button class = "card-btn">Add to Cart</button>
@@ -109,18 +110,32 @@ function inject(item,num) {
     </div>`,
   );
 }
-for (let i = 0; i < items.length; i++){
-    inject(items[i],i)
+function injectList(con){
+    const container = document.querySelector(con);
+  container.insertAdjacentHTML(
+      "beforeend",
+` <p> ${cart}</p>`
+);
+console.log(cart);
 }
-
-const buttons = document.querySelectorAll("button");
+//make cards
+for (let i = 0; i < items.length; i++){
+    inject(items[i],i,"#items")
+}
+//give button on cards 
+const buttons = document.querySelectorAll("button.card-btn");
 buttons.forEach((button) =>
   button.addEventListener("click", function (event) {
     const id = event.target.closest(".card").getAttribute("data-item");
     addCart(items[id]);
     console.log(cart);
-    //go find item in array
-    //items[data-item]
   }),
 );
+const cartBtn = document.querySelector("button.cart-btn");
+  cartBtn.addEventListener("click", function () {
+    injectList("#cart");
+  })
+
+
+
 
