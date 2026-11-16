@@ -90,7 +90,10 @@ function applyCode(input){
 // applyCode("oiwerhtio")
 // console.log(codeActive)
 function removeCode(){codeActive = false}
+//finish this
+function cartToText(cart){
 
+}
 //html stuff
 
 function inject(item,num,con) {
@@ -131,11 +134,17 @@ buttons.forEach((button) =>
     console.log(cart);
   }),
 );
-const cartBtn = document.querySelector("button.cart-btn");
+//open cart
+const cartBtn = document.querySelector("#open");
+const popUp = document.querySelector("div.pop")
   cartBtn.addEventListener("click", function () {
-    injectList("#cart");
-  })
+    popUp.style.display = "flex";
 
+  })
+const cartBtnOpen = document.querySelector("#close");
+cartBtnOpen.addEventListener("click", function(){
+    popUp.style.display = "none";
+})
 
 
 
