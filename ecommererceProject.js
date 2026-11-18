@@ -92,7 +92,15 @@ function applyCode(input){
 function removeCode(){codeActive = false}
 //finish this
 function cartToText(cart){
-
+    let str = ""
+   console.log(Object.entries(cart))
+    for (let i = 0; i < Object.keys(cart).length; i++){
+        // console.log(Object.entries(cart))
+        str = str+ "/n "+ cart[i]+ String(cart[i].price)
+        
+    }
+    // console.log(cart[0])
+    return str
 }
 //html stuff
 
@@ -131,7 +139,8 @@ buttons.forEach((button) =>
   button.addEventListener("click", function (event) {
     const id = event.target.closest(".card").getAttribute("data-item");
     addCart(items[id]);
-    console.log(cart);
+    // console.log(cart);
+    console.log(cartToText(cart));
   }),
 );
 //open cart
