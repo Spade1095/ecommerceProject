@@ -7,7 +7,7 @@ body,
     padding:0;
 }
 p{
-    color:white;
+    color:black;
 }
 .container{
 display: flex;
@@ -92,16 +92,32 @@ button{
     border: 1px solid #f3f98b;
     transition: all 0.3s;
 }
-.cart-btn{
+#open{
     background-color:greenyellow ;
     align-self: center;
     margin-left:40%;
     margin-bottom: 10%;
 }
+#close{
+    background-color:rgb(255, 47, 47) ;
+    align-self: center;
+    margin-left:0rem;
+    margin-bottom: 10%;
+}
 .pop{
     display: none;
     position: fixed;
-    top: 40%;
+    top: 20%;
+    bottom:30%;
     left:50%;
-    background-color: black;
+    background-color: white;
+    margin:10rem auto;
+    height:30rem;
+    width:50%;
+    top:30%;
+    left:45%;
+    transform: translate(-50%,-50%);
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
 }

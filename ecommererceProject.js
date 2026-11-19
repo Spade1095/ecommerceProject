@@ -20,10 +20,9 @@ const items = [
     { name: "Ripe Bananas (Single Hand / 12 count)", price: 4.99,id:18 ,catagorys: ["Fruit", "Fresh Produce", "Family Size", "Bulk Savings"], image: "./", stock: 10 },
     { name: "Dehydrated Banana Chips (Bag)", price: 2.79,id:19 ,catagorys: ["Fruit", "Pantry Snacks", "Pantry Stable", "Crunchy Snacks"], image: "./", stock: 10 }
 ];
-const codes =["JustinSmells", "mosekova", "kachow"];
-let cart ={
-
-}
+const codes =["JustinSmells", "My naem is Mosekova and I need you to fix my printer", "kachow"];
+let cart ={};
+let stuffInCart=[];
 let codeActive = false;
 function addCart(add){
 if (add.stock>0){
@@ -32,6 +31,7 @@ if (add.stock>0){
     }else{
             cart[add.name] = add
             cart[add.name]["count"] = 1
+            stuffInCart.push(add.name);
         }
     items[add.id].stock = add.stock - 1
     }else{
@@ -96,12 +96,10 @@ function cartToText(cart){
    console.log(Object.entries(cart))
     for (let i = 0; i < Object.keys(cart).length; i++){
         // console.log(Object.entries(cart))
-        str = str+ "/n "+ cart[i]+ String(cart[i].price)
-        
-    }
-    // console.log(cart[0])
+        str = str+ "/n "+ String(i+1)+ ": " +stuffInCart[i]+" "+cart[stuffInCart[i]].price + " "+cart[stuffInCart[i]].count +"x"
+    };
     return str
-}
+};
 //html stuff
 
 function inject(item,num,con) {
@@ -120,7 +118,7 @@ function inject(item,num,con) {
 
     </div>`,
   );
-}
+};
 function injectList(con){
     const container = document.querySelector(con);
   container.insertAdjacentHTML(
@@ -145,15 +143,26 @@ buttons.forEach((button) =>
 );
 //open cart
 const cartBtn = document.querySelector("#open");
-const popUp = document.querySelector("div.pop")
+const popUp = document.querySelector("div.pop");
+const reciet = document.querySelector("#reciet");
   cartBtn.addEventListener("click", function () {
     popUp.style.display = "flex";
-
+    reciet.textContent= cartToText(cart);
   })
+  //close cart
 const cartBtnOpen = document.querySelector("#close");
 cartBtnOpen.addEventListener("click", function(){
     popUp.style.display = "none";
 })
+//coupon code btn
+document.querySelector("form").addEventListener("submit", function(event){
+
+        event.preventDefault()
+        console.log("submitted")
+        let x = document.querySelector("#coupon")
+        console.log(x.value)
+        x.value = ""
+});
 
 
 
