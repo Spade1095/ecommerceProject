@@ -43,7 +43,7 @@ if (add.stock>0){
 console.log(cart)
 
 function removeCart(initial, remove){
-        for(i=0; i<remove.length; i++){
+        for(let i=0; i<remove.length; i++){
         if(items.some(item => item.name === remove[i])){
             initial.pop(items.find(item => item.name === remove[i]))
         } 
@@ -91,13 +91,8 @@ function applyCode(input){
 // console.log(codeActive)
 function removeCode(){codeActive = false}
 //finish this
-function cartToText(cart){
-    let str = ""
-   console.log(Object.entries(cart))
-    for (let i = 0; i < Object.keys(cart).length; i++){
-        // console.log(Object.entries(cart))
-        str = str+ "/n "+ String(i+1)+ ": " +stuffInCart[i]+" "+cart[stuffInCart[i]].price + " "+cart[stuffInCart[i]].count +"x"
-    };
+function cartToText(input){
+ const str = input.name +" "+input.price + " "+input.count +"x"
     return str
 };
 //html stuff
@@ -119,39 +114,47 @@ function inject(item,num,con) {
     </div>`,
   );
 };
-function injectList(con){
+function injectList(item, con) {
     const container = document.querySelector(con);
-  container.insertAdjacentHTML(
-      "beforeend",
-` <p> ${cart}</p>`
-);
+    container.insertAdjacentHTML(
+        "beforeend",
+        ` <p> ${item}</p>`
+    );
+    console.log(cart);
+};
 console.log(cart);
-}
+
 //make cards
 for (let i = 0; i < items.length; i++){
     inject(items[i],i,"#items")
 }
-//give button on cards 
+//give button on cards add to cart
 const buttons = document.querySelectorAll("button.card-btn");
 buttons.forEach((button) =>
   button.addEventListener("click", function (event) {
     const id = event.target.closest(".card").getAttribute("data-item");
     addCart(items[id]);
     // console.log(cart);
-    console.log(cartToText(cart));
   }),
 );
+
 //open cart
 const cartBtn = document.querySelector("#open");
 const popUp = document.querySelector("div.pop");
 const reciet = document.querySelector("#reciet");
-  cartBtn.addEventListener("click", function () {
+cartBtn.addEventListener("click", function () {
     popUp.style.display = "flex";
-    reciet.textContent= cartToText(cart);
-  })
+    document.querySelector("#cartReceipt").innerHTML = "";
+    for (let i = 0; i < stuffInCart.length; i++) {
+        console.log(cart);
+        console.log(cart[stuffInCart[i]]);
+        console.log("tst");
+        injectList(cartToText(cart[stuffInCart[i]]), "#cartReceipt");
+    }
+});
   //close cart
-const cartBtnOpen = document.querySelector("#close");
-cartBtnOpen.addEventListener("click", function(){
+const cartBtnClose = document.querySelector("#close");
+cartBtnClose.addEventListener("click", function(){
     popUp.style.display = "none";
 })
 //coupon code btn
