@@ -27,7 +27,7 @@ let codeActive = false;
 function addCart(add){
 if (add.stock>0){
     if(cart[`${add.name}`]){
-            cart[add.name].count = cart[add.name].count + 1
+            cart[add.name].count++
     }else{
             cart[add.name] = add
             cart[add.name]["count"] = 1
@@ -40,16 +40,18 @@ if (add.stock>0){
 }
 }
 // addCart(items[1])
-console.log(cart)
 
 function removeCart(remove){
     if(cart[`${remove.name}`]){
             cart[remove.name].count = cart[remove.name].count - 1
-    }else{
-            cart[remove.name] = remove
-            cart[remove.name]["count"] = 1
-            stuffInCart.push(remove.name);
+    }
+    if(cart[remove.name].count === 0){
+    let loc = stuffInCart.indexOf(remove.name) //find where in list it is 
+        if(loc !== -1){ //check if u found it
+            stuffInCart.splice(loc, 1)
         }
+        delete cart[remove.name] //remove it from cart so it no 0
+    }
     items[remove.id].stock = remove.stock + 1
     };
 
@@ -117,7 +119,7 @@ function injectList(item,num,con) {
     container.insertAdjacentHTML(
         "beforeend",
         ` 
-        <div class = "recieptText" data-item"${num}">
+        <div class = "recieptText" data-item="${num}">
         <p> ${item}</p>
         <button class = "cart-btn">Remove From Cart</button>
         </div>
@@ -130,9 +132,17 @@ console.log(cart);
 function updateRecipt(num){
     document.querySelector("#cartReceipt").innerHTML = "";
     for (let i = 0; i < stuffInCart.length; i++) {
-        injectList(cartToText(cart[stuffInCart[i]]), num,"#cartReceipt");
-
+        injectList(cartToText(cart[stuffInCart[i]]), cart[stuffInCart[i]].id,"#cartReceipt");
     }
+    let cartButtons = document.querySelectorAll("#cartReceipt button.cart-btn");
+    cartButtons.forEach((buttons) =>
+    buttons.addEventListener("click", function (event) {
+    let id = event.target.closest(".recieptText").getAttribute("data-item");
+    removeCart(items[id]);
+    updateRecipt(id);
+    // console.log(cart);
+  }),
+);
 }
 //make cards
 for (let i = 0; i < items.length; i++){
@@ -152,15 +162,7 @@ buttons.forEach((button) =>
 
 //remove from cart btns
 //no work maybe doing add and remove at same time?
-const cartButtons = document.querySelectorAll("button.cart-btn");
-buttons.forEach((button) =>
-  button.addEventListener("click", function (event) {
-    const id = event.target.closest(".card").getAttribute("data-item");
-    removeCart(items[id]);
-    updateRecipt(id);
-    // console.log(cart);
-  }),
-);
+
 //open cart
 const cartBtn = document.querySelector("#open");
 const popUp = document.querySelector("div.pop");

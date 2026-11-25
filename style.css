@@ -154,3 +154,6 @@ display: none;
     border-bottom: 1px solid #e0e0e0;
     font-size: 0.9rem;
 }
+#total{
+    font-size: 3rem;
+}
